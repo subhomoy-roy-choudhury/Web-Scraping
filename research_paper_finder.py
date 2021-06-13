@@ -43,10 +43,10 @@ if val is not None:
 
         content = driver.page_source
         soup = BeautifulSoup(content, "html.parser")
-        st_divs_len = soup.find_all('div',{"class" : "List-results-items"})
-        print(len(st_divs_len))
+        st_divs_all = soup.find_all('div',{"class" : "List-results-items"})
+        print(len(st_divs_all))
 
-        for i in range(len(st_divs_len)):
+        for st_divs in st_divs_all :
 
             TITLE = ''
             PROFILE_URL = ''
@@ -55,7 +55,7 @@ if val is not None:
             DOI_URL = ''
 
             print("*"*20)
-            st_divs = soup.find_all('div',{"class" : "List-results-items"})[i]
+            # st_divs = soup.find_all('div',{"class" : "List-results-items"})[i]
             abstract = st_divs.find('i',{"class" : "icon-caret-abstract color-xplore-blue"})
 
             if abstract is not None : 
@@ -107,7 +107,7 @@ if val is not None:
             print(scraper_data)
             data.append(scraper_data)
 
-        with open('google_news_scraper.json','w') as file :
+        with open('research_paper_scraper_test.json','w') as file :
             json.dump(data,file,ensure_ascii=False, indent=1)
         print("*"*20)
 
